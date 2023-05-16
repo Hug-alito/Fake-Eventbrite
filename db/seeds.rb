@@ -5,3 +5,27 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# Création d'utilisateurs
+1.times do
+  User.create(
+    first_name: [Faker::Name.first_name, Faker::Name.unique.first_name, Faker::Games::Pokemon.name].sample,
+    last_name: [Faker::Name.last_name, Faker::Games::WarhammerFantasy.hero].sample,
+    description: Faker::Lorem.paragraph(sentence_count: 2),
+    email: "sasida@hot.fr",
+    password: "123456"
+  )
+end
+
+# Création d'évènements
+1.times do
+  Event.create(
+    start_date: Faker::Time.between(from: DateTime.now, to: DateTime.now + 365),
+    duration: rand(1..10),
+    title: Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraph(sentence_count: 2),
+    price: rand(0..100),
+    location: Faker::Address.full_address,
+    admin_id: User.pluck(:id).sample,
+  )
+end

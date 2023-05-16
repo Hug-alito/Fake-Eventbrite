@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   get 'static_pages/index'
   get 'static_pages/secret'
   devise_for :users
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit, :update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  root 'static_pages#index'
+  root 'events#index'
   # Defines the root path route ("/")
   # root "articles#index"
 end
