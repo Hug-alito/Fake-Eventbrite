@@ -16,4 +16,10 @@ class Event < ApplicationRecord
   belongs_to :admin, class_name: 'User', foreign_key: 'admin_id'
   has_many :attendances
   has_many :attendants, through: :attendances, source: :user
+
+  before_save :calculate_end_date
+
+  def calculate_end_date
+    self.end_date = start_date + duration.minutes
+  end
 end
